@@ -4,7 +4,6 @@ from sklearn.cross_validation import train_test_split
 from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.cross_validaiton import KFold
 import csv
 
 labels = np.loadtxt('data.csv',delimiter=',',dtype='|S6',usecols=(0,))
