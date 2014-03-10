@@ -19,6 +19,20 @@ for train_index, test_index in kf:
     nb_pred = nb.predict(vectors[test_index])
     print("NB Number of mislabeled points: %d" % (labels[test_index]!=nb_pred).sum())
 
+rf = RandomForestClassifier(n_estimators=5)
+for train_index, test_index in kf:
+    rf = rf.fit(vectors[train_index],labels[train_index])
+    rf_pred = rf.predict(vectors[test_index])
+    print("RF Number of mislabeled points: %d" % (labels[test_index]!=rf_pred).sum())
+
+neigh = KNeighborsClassifier(n_neighbors=100).fit(vectors[train_index],labels[train_index])
+for train_index, test_index in kf:
+    neigh_pred = neigh.fit(vectors[train_index],labels[train_index])
+    neigh_pred = neigh.predict(vectors[test_index])
+    print("KNN Number of mislabeled points: %d" % (labels[test_index]!=neigh_pred).sum())
+
+
+
 '''vectors_train, vectors_test, labels_train, labels_test = train_test_split(vectors, labels, test_size=0.20, random_state=42)
 start = time.time()
 gnb = GaussianNB()
