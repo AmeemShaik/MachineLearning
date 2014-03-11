@@ -1,3 +1,3 @@
 all: data
 
-data: classifiers.py ;python classifiers.py
+data: collectData.py analyzer.py ;python collectData.py
