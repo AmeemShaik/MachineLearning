@@ -23,19 +23,32 @@ for train_index, test_index in kf:
 
 print ("Average NB accuracy: %3f" % (nb_total/len(kf)))
 
-rf = RandomForestClassifier(n_estimators=5)
-rf_total = 0
-for train_index, test_index in kf:
-    rf = rf.fit(vectors[train_index],labels[train_index])
-    rf_pred = rf.predict(vectors[test_index])
-    rf_total+=accuracy_score(labels[test_index],rf_pred)
+maxTrees = 100
+for numTrees in range(1,maxTrees):
+    rf = RandomForestClassifier(n_estimators=numTrees)
+    rf_total = 0
+    for train_index, test_index in kf:
+        rf = rf.fit(vectors[train_index],labels[train_index])
+        rf_pred = rf.predict(vectors[test_index])
+        rf_total+=accuracy_score(labels[test_index],rf_pred)
 
-print ("Average RF accuracy: %3f" % (rf_total/len(kf)))
-
-neigh = KNeighborsClassifier(n_neighbors=100).fit(vectors[train_index],labels[train_index])
-neigh_total = 0
-for train_index, test_index in kf:
-    neigh_pred = neigh.fit(vectors[train_index],labels[train_index])
-    neigh_pred = neigh.predict(vectors[test_index])
-    neigh_total+=accuracy_score(labels[test_index],neigh_pred)
-print ("Average KNN accuracy: %3f" % (neigh_total/len(kf)))
+    print ("Average RF accuracy: %3f" % (rf_total/len(kf)))
+maxFeatures = 31
+for features in range(1,maxFeatures):
+    rf = RandomForestClassifier(n_estimators=31,max_features=features)
+    rf_total = 0
+    for train_index, test_index in kf:
+        rf = rf.fit(vectors[train_index],labels[train_index])
+        rf_pred = rf.predict(vectors[test_index])
+        rf_total+=accuracy_score(labels[test_index],rf_pred)
+    print
+    print ("Average RF accuracy: %3f" % (rf_total/len(kf)))
+maxNeighbors = 100
+for numNeighbors in range(1,maxNeighbors):
+    neigh = KNeighborsClassifier(n_neighbors=numNeighbors).fit(vectors[train_index],labels[train_index])
+    neigh_total = 0
+    for train_index, test_index in kf:
+        neigh_pred = neigh.fit(vectors[train_index],labels[train_index])
+        neigh_pred = neigh.predict(vectors[test_index])
+        neigh_total+=accuracy_score(labels[test_index],neigh_pred)
+    print ("Average KNN accuracy: %3f" % (neigh_total/len(kf)))
