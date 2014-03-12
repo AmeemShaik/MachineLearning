@@ -127,6 +127,7 @@ def analyzeKNN(vectors,labels,posLabel,kf,maxNeighbors,filename):
 
 def __getMetrics(trueLabels,predLabels,posLabel):
     truePos=trueNeg=falsePos=falseNeg = 0
+    print len(trueLabels)
     for i in range(len(trueLabels)):
        if(trueLabels[i]==posLabel):
            if(predLabels[i]==posLabel):
