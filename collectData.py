@@ -25,6 +25,6 @@ for c in rawVectors.T:
     vectors.append(le.transform(c))
 vectors = np.array(vectors).T
 kf = KFold(len(labels),n_folds=10,indices = False,shuffle=True,random_state=42)
-#analyzer.analyzeNB(vectors,labels,' >50K',kf,'SalaryNBResults')
-#analyzer.analyzeRF(vectors,labels,' >50K',kf,100,13,'SalaryRFResults')
-analyzer.analyzeKNN(vectors,labels,' >50K',kf,100,'SalaryKNNResults')
+analyzer.analyzeNB(vectors,labels,' <=50K',kf,'SalaryNBResults')
+analyzer.analyzeRF(vectors,labels,' <=50K',kf,100,13,'SalaryRFResults')
+analyzer.analyzeKNN(vectors,labels,' <=50K',kf,100,'SalaryKNNResults')
